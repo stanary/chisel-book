@@ -502,6 +502,11 @@ and an editor of your choice. In the tradition of other books, all commands that
 shall type in a shell/terminal/CLI are preceded by a \code{\$} character, which you
 shall not type in. As an example, here is the Unix \code{ls} command, which lists files in
 the current folder:
+本书不对您使用的编程环境或编辑器做任何假设。
+您仅在命令行中使用\ code {sbt}即可轻松学习基础知识。 按照其他书籍的传统，
+你在shell / terminal / CLI中输入任何命令前键入一个\ code {\ $}字符，然后再输入，
+其实不应键入。例如，这是Unix \ code {ls}命令，该命令列出了
+当前文件夹：
 
 \begin{verbatim}
 $ ls
@@ -514,6 +519,12 @@ It is possible in \myref{https://www.eclipse.org/}{Eclipse} and
 \myref{https://www.jetbrains.com/help/idea/discover-intellij-idea-for-scala.html}{IntelliJ}
 to generate a project from the sbt project configuration in \code{build.sbt}.
 You can create an Eclipse project via
+也就是说，一个集成开发环境（IDE），在其中运行编译器就可以加快编码速度。 由于Chisel是Scala库，因此所有支持Scala的IDE
+也是不错的Chisel的IDE。
+可以在\ myref {https://www.eclipse.org/} {Eclipse}和
+\ myref{https://www.jetbrains.com/help/idea/discover-intellij-idea-for-scala.html} {}的IntelliJ
+从\ code {build.sbt}中的sbt项目配置生成一个项目。
+
 \begin{verbatim}
 $ sbt eclipse
 \end{verbatim}
@@ -839,7 +850,7 @@ such a 2:1 multiplexer, or mux for short. Depending on the value of the
 select signal (\code{sel}) signal \code{y} will represent signal \code{a} or
 signal \code{b}.
 
-复用器是一个选择选项的电路。在最基本的形式，它在二者选择其一。图2.2表示一个二选一复用器，或是用mux简单表示。取决于选择信号sel，y会表示信号a或是信号b。
+选择器是一个选择选项的电路。在最基本的形式，它在二者选择其一。图2.2表示一个二选一复用器，或是用mux简单表示。取决于选择信号sel，y会表示选择的信号是a或是信号b。
 
 
 \begin{figure}
@@ -852,7 +863,7 @@ signal \code{b}.
 A multiplexer can be built from logic.
 However, as multiplexing  is such a standard operation, Chisel provides a multiplexer,
 
-一个复用器可以通过逻辑简单搭建。但是，复用是一个常用操作，Chisel提供了一个复用器。
+一个选择器可以通过逻辑简单搭建。但是，复用是一个常用操作，Chisel提供了一个选择器。
 
 \shortlist{code/mux.txt}
 
@@ -950,19 +961,27 @@ till 9 and wraps around to 0 when reaching 9.
 Chisel provides two constructs to group related signals: (1) a \code{Bundle} to group
 signals of different types and (2) a \code{Vec} to represent an indexable collection of signals
 of the same type.
+Chisel提供了两种将相关信号分组的结构：（1）\ code {Bundle}进行分组不同类型的信号和（2）\ code {Vec}来表示信号的可索引集合
+相同类型的。
 \code{Bundle}s and \code{Vec}s can be arbitrarily nested.
-
+\ code {Bundle}和\ code {Vec}可以任意嵌套。
 
 A Chisel bundle groups several signals. The entire bundle can be referenced
 as a whole, or individual fields can be accessed by their name.
 We can define a bundle (collection of signals) by defining a class that
 extends \code{Bundle} and list the fields as \code{val}s within the constructor block.
+Chisel 中bundle可以将多个信号分组。 整个包都可以引用。
+对整体而言，也可以按名称访问各个字段。
+我们可以通过定义一个类来定义一个bundle（信号集合）
+扩展\ code {Bundle}并在构造函数块内将字段作为\ code {val}列出。
 
 
 \shortlist{code/bundle.txt}
 
 \noindent To use a bundle, we create it with \code{new} and wrap it into a \code{Wire}.
 The fields are accessed with the dot notation:
+要使用包，我们使用\ code {new}创建它，并将其包装到\ code {Wire}中。
+使用点符号访问这些字段：
 
 \shortlist{code/bundle_use.txt}
 
@@ -971,6 +990,11 @@ Dot notation is common in object-oriented languages, where \code{x.y} means
 As Chisel is object-oriented, we use dot notation to access fields in a bundle.
 A bundle is similar to a \code{struct} in C, a \code{record} in VHDL, or a
 \code{struct} in SystemVerilog.
+点表示法在面向对象的语言中很常见，其中\ code {x.y}表示
+\ code {x}是对对象的引用，\ code {y}是该对象的字段。
+由于Chisel是面向对象的，因此我们使用点表示法来访问包中的字段。
+捆绑包类似于C中的\ code {struct}，VHDL中的\ code {record}或
+SystemVerilog中的\ code {struct}。
 A bundle can also be referenced as a whole:
 
 \shortlist{code/bundle_ref.txt}
